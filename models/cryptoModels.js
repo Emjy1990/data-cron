@@ -35,7 +35,6 @@ module.exports = class cryptoModels extends coreModelAbstract{
                 dateConverted = date.getDate()+"-"+(date.getMonth()+1)+"-"+ date.getFullYear()
             }
         }
-
         var url = await CoinGeckoInterface.constructUrlPriceHistory(symbolMain,dateConverted)
 
         //manage request
