@@ -3,7 +3,7 @@
 */
 
 const schedule = require('node-schedule')
-const DispatchCronTypeManager = require('./../utils/DispatchCronTypeManager')
+const DispatchCronTypeManager = require('./dispatchCronTypeManager')
 dispatchCronTypeManager = new DispatchCronTypeManager
 
 module.exports = class cronJobManager {
