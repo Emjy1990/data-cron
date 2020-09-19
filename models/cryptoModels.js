@@ -35,28 +35,30 @@ module.exports = class cryptoModels extends coreModelAbstract{
                 dateConverted = date.getDate()+"-"+(date.getMonth()+1)+"-"+ date.getFullYear()
             }
         }
-        var url = await CoinGeckoInterface.constructUrlPriceHistory(symbolMain,dateConverted)
 
-        //manage request
-        await this.hTTPRequest.query(url, "", "GET")
-        .then( 
-          result => { 
-            this.hTTPRequest.responseBody = result.body
-            return this.hTTPRequest.query(url, "", "GET")
-        })
-        var JSONresponse = JSON.parse(this.hTTPRequest.responseBody)
-
-        if(!JSONresponse.error){
-            // persist data in DB
-            const addData = new CryptoValueShema({
-                symbol_crypto: JSONresponse.symbol,
-                symbol_fiat: symbolSecond,
-                date: date,
-                fiat_value : JSONresponse.market_data.current_price[symbolSecond]
+        var LimitedDate = new Date('2018-12-31')
+        if(date > LimitedDate){
+            var url = await CoinGeckoInterface.constructUrlPriceHistory(symbolMain,dateConverted)
+            //manage request
+            await this.hTTPRequest.query(url, "", "GET")
+            .then( 
+            result => { 
+                this.hTTPRequest.responseBody = result.body
+                return this.hTTPRequest.query(url, "", "GET")
             })
-            addData.save(function (err, addDatas) {
-                if (err) return console.error(err);
-            })
-        } else { console.log(JSONresponse.error) }
-  }
+            var JSONresponse = JSON.parse(this.hTTPRequest.responseBody)
+            if(!JSONresponse.error && JSONresponse.market_data){
+                // persist data in DB
+                const addData = new CryptoValueShema({
+                    symbol_crypto: JSONresponse.symbol,
+                    symbol_fiat: symbolSecond,
+                    date: date,
+                    fiat_value : JSONresponse.market_data.current_price[symbolSecond]
+                })
+                addData.save(function (err, addDatas) {
+                    if (err) return console.error(err);
+                })
+            } else { console.log(JSONresponse.error) }
+        }
+    }
 }
