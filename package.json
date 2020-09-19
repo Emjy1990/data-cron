@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/Emjy1990/data-cron#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.5",
+    "node-schedule": "^1.3.2",
+    "request": "^2.88.2"
   }
 }

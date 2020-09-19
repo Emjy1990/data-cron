@@ -1,13 +1,32 @@
 const express = require('express')
 const app = express()
-const port = 8000
+require('dotenv').config();
 
+const port = process.env.PORT
+
+const cronJobController = require('./controllers/cronJobController')
+var CronJob = new cronJobController
+
+
+/*
+* Cette route va lister tous les jobs cron en service
+*/
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  CronJob.empty(res)
 })
 
-app.get('/list', (req, res) => {
-    res.send('List cron task')
+/*
+* Cette route va lancer les jobs cron 
+*/
+app.get('/create', (req, res) => {
+  CronJob.create(req,res)
+})
+
+/*
+* Cette route va stopper les jobs cron par leur nom
+*/
+app.get('/delete', (req, res) => {
+  CronJob.deleteCron(req, res)
 })
 
 app.listen(port, () => {
