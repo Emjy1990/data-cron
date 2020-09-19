@@ -19,7 +19,6 @@ app.get('/', (req, res) => {
 * Cette route va lancer les jobs cron 
 */
 app.get('/create', (req, res) => {
-  console.log(req.query)
   CronJob.create(req,res)
 })
 
