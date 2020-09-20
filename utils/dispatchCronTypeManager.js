@@ -29,11 +29,10 @@ module.exports = class dispatchCronTypeManager {
                 });
                 if(job){return true} else {false}
             case "3": 
-            cryptoModels.getTKTAmountAndPersistDB()
-            // var job = await schedule.scheduleJob(name,frequency, function() {
-            //     cryptoModels.getTKTAmountAndPersistDB()
-            // });
-            // if(job){return true} else {false}
+                var job = await schedule.scheduleJob(name,frequency, function() {
+                    cryptoModels.getTKTAmountAndPersistDB()
+                });
+                if(job){return true} else {false}
             break;
             default: 
                 return false
