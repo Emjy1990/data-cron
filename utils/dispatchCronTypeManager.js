@@ -28,6 +28,12 @@ module.exports = class dispatchCronTypeManager {
                     cryptoModels.getPriceAndPersistDB(symbolMain,symbolSecond,"",true)
                 });
                 if(job){return true} else {false}
+            case "3": 
+            cryptoModels.getTKTAmountAndPersistDB()
+            // var job = await schedule.scheduleJob(name,frequency, function() {
+            //     cryptoModels.getTKTAmountAndPersistDB()
+            // });
+            // if(job){return true} else {false}
             break;
             default: 
                 return false
