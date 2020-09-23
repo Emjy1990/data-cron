@@ -2,9 +2,9 @@
 * This file is about routing of feature
 */
 
-const cronJobCRUD = require('../models/cronJobModels')
+const cronJobCRUD = require('./../models/cronJobModels')
 var CronJobCRUD = new cronJobCRUD
-const cronJobManager = require('../utils/cronJobManager')
+const cronJobManager = require('./../utils/cronJobManager')
 var CronJobManager = new cronJobManager
 
 module.exports = class cronJobController{

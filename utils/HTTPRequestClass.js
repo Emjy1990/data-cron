@@ -1,4 +1,4 @@
-const request = require('request');
+const request = require('request').defaults({ family: 4 });
 
 module.exports = class Request {
     

@@ -2,9 +2,9 @@
 * This file is about CRON DB function
 */
 
-const mongooseDB = require('../orm/mongoose');
+const mongooseDB = require('./../orm/mongoose');
 const MongooseDB = new mongooseDB(process.env.DB_URL);
-const cronJobShema = require('../shemas/cronJobShema')
+const cronJobShema = require('./../shemas/cronJobShema')
 
 module.exports = class cronJobCRUD {
 
