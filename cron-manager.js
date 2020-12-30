@@ -20,21 +20,21 @@ try{
   /*
   * Cette route va lister tous les jobs cron en service
   */
-  app.get('/', (req, res) => {
+  app.get('/cron', (req, res) => {
     CronJob.empty(res)
   })
 
   /*
   * Cette route va lancer les jobs cron 
   */
-  app.get('/create', (req, res) => {
+  app.get('/cron/create', (req, res) => {
     CronJob.create(req,res)
   })
 
   /*
   * Cette route va stopper les jobs cron par leur nom
   */
-  app.get('/delete', (req, res) => {
+  app.get('/cron/delete', (req, res) => {
     CronJob.deleteCron(req, res)
   })
 
